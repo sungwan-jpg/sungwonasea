@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sungwon Asea International Co., Ltd.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* 기본 리셋 및 글로벌 대기업 스타일 폰트 설정 */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Open Sans', 'Noto Sans KR', Arial, sans-serif; color: #333; background-color: #fff; line-height: 1.6; word-break: keep-all; }
+        a { text-decoration: none; color: inherit; }
+        
+        /* 1. 상단 화이트 고정 헤더 */
+        header { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 80px; 
+            background-color: rgba(255, 255, 255, 0.98); 
+            border-bottom: 1px solid #e0e0e0; 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 0 40px; z-index: 1000;
+        }
+        .logo { font-size: 20px; font-weight: 700; color: #000; letter-spacing: 1px; }
+        nav ul { list-style: none; display: flex; gap: 35px; }
+        nav ul li a { font-size: 14px; font-weight: 600; color: #333; transition: color 0.2s; }
+        nav ul li a:hover { color: #003E92; } /* 미쓰비시 포인트 블루 */
+
+        /* 2. 메인 Hero 섹션 (사진 + 좌측 하단 흰색 박스) */
+        .hero { 
+            margin-top: 80px; /* 헤더 높이만큼 띄움 */
+            position: relative; width: 100%; height: 600px;
+            /* 아까 저장한 메인 사진 연결. 만약 사진이 없으면 짙은 회색이 나옵니다. */
+            background: #2a2a2a url('main_trading_port.jpg') no-repeat center center; 
+            background-size: cover;
+        }
+        .hero-box {
+            position: absolute; bottom: 40px; left: 40px;
+            background-color: #fff;
+            padding: 40px; max-width: 550px;
+            border-top: 5px solid #003E92; /* 상단 블루 라인 포인트 */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .hero-box h2 { font-size: 32px; font-weight: 700; color: #111; margin-bottom: 15px; line-height: 1.3; }
+        .hero-box p { font-size: 15px; color: #555; }
+
+        /* 공통 섹션 레이아웃 */
+        .section-container { max-width: 1200px; margin: 0 auto; padding: 100px 20px 80px 20px; }
+        .section-title { font-size: 28px; font-weight: 600; color: #111; margin-bottom: 40px; border-bottom: 2px solid #000; padding-bottom: 10px; }
+
+        /* 3. 사업 영역 (Our Business) - 사진 + 텍스트 정갈한 그리드 */
+        .business-grid { display: flex; justify-content: space-between; gap: 30px; }
+        .biz-card { flex: 1; min-width: 300px; }
+        
+        /* 절대 끊기지 않는 글로벌 안정 서버(Pexels) 사진 교체 완료 */
+        .biz-img { width: 100%; height: 220px; background-size: cover; background-position: center; margin-bottom: 20px; background-color: #f0f0f0; }
+        /* 금속 및 희토류 (거대한 공장/금속 이미지) */
+        .img-metal { background-image: url('https://images.pexels.com/photos/2800121/pexels-photo-2800121.jpeg?auto=compress&cs=tinysrgb&w=800'); }
+        /* 농화학 (광활하고 푸른 대규모 농장 트랙터 이미지) */
+        .img-agro { background-image: url('https://images.pexels.com/photos/2165688/pexels-photo-2165688.jpeg?auto=compress&cs=tinysrgb&w=800'); }
+        /* 컨설팅 (프로페셔널한 글로벌 회의 이미지) */
+        .img-consult { background-image: url('https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800'); }
+        
+        .biz-card h3 { font-size: 18px; color: #111; margin-bottom: 10px; font-weight: 600; border-bottom: 1px solid #ccc; padding-bottom: 10px; }
+        .biz-card p { font-size: 14px; color: #555; line-height: 1.7; }
+
+        /* 4. 기업 정보 (Corporate Profile) - 미쓰비시 스타일 테이블 */
+        .profile-table { width: 100%; border-collapse: collapse; border-top: 2px solid #000; border-bottom: 2px solid #000; }
+        .profile-table th, .profile-table td { padding: 20px 15px; border-bottom: 1px solid #e0e0e0; text-align: left; vertical-align: top; }
+        .profile-table th { width: 250px; background-color: #f4f4f4; font-size: 14px; font-weight: 600; color: #333; }
+        .profile-table td { font-size: 14px; color: #444; }
+
+        /* 5. 다크 그레이 푸터 */
+        footer { background-color: #111; color: #999; padding: 50px 40px; font-size: 12px; }
+        .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; padding-bottom: 30px; margin-bottom: 30px; }
+        .footer-logo { font-size: 16px; font-weight: 700; color: #fff; }
+        .footer-links { display: flex; gap: 20px; }
+        .footer-links a:hover { color: #fff; text-decoration: underline; }
+
+        /* 반응형 (모바일) */
+        @media (max-width: 768px) {
+            header { padding: 0 20px; }
+            nav ul { display: none; }
+            .hero-box { left: 20px; right: 20px; bottom: 20px; padding: 25px; }
+            .hero-box h2 { font-size: 24px; }
+            .business-grid { flex-direction: column; }
+            .profile-table th, .profile-table td { display: block; width: 100%; }
+            .profile-table th { background-color: transparent; border-bottom: none; padding-bottom: 5px; font-weight: 700; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">SUNGWON ASEA</div>
+        <nav>
+            <ul>
+                <li><a href="#business">Our Business</a></li>
+                <li><a href="#profile">Corporate Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-box">
+            <h2>Global Value Creator</h2>
+            <p>Sungwon Asea International Co., Ltd. provides optimized trading services and business consulting to create sustainable global value.</p>
+        </div>
+    </section>
+
+    <div id="business" class="section-container">
+        <h2 class="section-title">Our Business</h2>
+        <div class="business-grid">
+            <div class="biz-card">
+                <div class="biz-img img-metal"></div>
+                <h3>Metal & Strategic Minerals</h3>
+                <p>글로벌 국영기업 파트너십을 통한 고순도 알루미늄 잉곳(A7) 및 미래 첨단 산업 핵심 자원인 희토류(Rare Earth Elements) 글로벌 트레이딩.</p>
+            </div>
+            <div class="biz-card">
+                <div class="biz-img img-agro"></div>
+                <h3>Agrochemical Resources</h3>
+                <p>세계적인 식량 안보와 농업 생산성 향상을 위한 고품질 비료 및 농약 자원의 글로벌 공급망 구축 및 전략적 유통.</p>
+            </div>
+            <div class="biz-card">
+                <div class="biz-img img-consult"></div>
+                <h3>Management Consulting</h3>
+                <p>다년간의 글로벌 무역 경험을 기반으로 기업의 해외 진출, 유통 네트워크 최적화, 수익 모델 개선을 돕는 비즈니스 솔루션 제공.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="profile" class="section-container" style="padding-top: 0;">
+        <h2 class="section-title">Corporate Profile</h2>
+        <table class="profile-table">
+            <tbody>
+                <tr>
+                    <th>Company Name</th>
+                    <td>Sungwon Asea International Co., Ltd. (성원아세아인터내셔널)</td>
+                </tr>
+                <tr>
+                    <th>President & CEO</th>
+                    <td>Park, Sung-wan (박성완)</td>
+                </tr>
+                <tr>
+                    <th>Head Office</th>
+                    <td>2F, Gabidong, 11, Yeonmujang 15-gil, Seongdong-gu, Seoul, Republic of Korea<br>(서울시 성동구 연무장15길 11 가비동 2층)</td>
+                </tr>
+                <tr>
+                    <th>Contact</th>
+                    <td>Tel: 02-6498-0715<br>Email: sungwan@sungwonasea.com</td>
+                </tr>
+                <tr>
+                    <th>Main Business Operations</th>
+                    <td>General Trading (Metal, Rare Earth, Agrochemicals), Supply Chain Management, Business Consulting</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-logo">SUNGWON ASEA INTERNATIONAL CO., LTD.</div>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Use</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+        <div style="text-align: center;">
+            &copy; 2026 Sungwon Asea International Co., Ltd. All Rights Reserved.
+        </div>
+    </footer>
+
+</body>
+</html>
